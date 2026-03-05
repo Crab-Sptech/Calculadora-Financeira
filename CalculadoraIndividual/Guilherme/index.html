@@ -1,11 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./style.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="div_navbar"><h1>Calculadora Financeira SIMA</h1></div>
+
+        
+
+        <div class="div_conteudo">
+                <h1 class="titulo_P">CUSTOS SEM A SIMA</h1>
+            <div class="div_container">
+
+
+
+                <div class="div_calc">
+                    <div><h2>1.custo da ineficiencia Atual</h2></div>
+                    <div class="div_calc_ipt">
+                        <label>Pallets movimentados por mês</label>
+                        <input type="number" id="ipt_palletMensal" />
+
+                        <label>Taxa de erro / extravio </label>
+                        <input
+                            type="number"
+                            placeholder="1-100%"
+                            id="ipt_taxaErro"
+                        />
+
+                        <label>Valor Médio por pallet</label>
+                        <input type="number" id="ipt_valorPallet" />
+                    </div>
+                    <div class="div_calc1_Btn"><button onclick="calc1()">Calcular Custo</button></div>
+
+                    <div id="div_mensagem_calc1" ></div>
+                </div>
+
+
+                <div class="div_calc">
+                    <div><h2>2.Custo da falta de visibilidade</h2></div>
+                    <div class="div_calc_ipt">
+                        <label>Tempo buscando espaços livres(min)</label>
+                        <input type="number" id="ipt_espacoLivre" />
+
+                        <label>Movimentações diarias no estoque</label>
+                        <input
+                            type="number"
+                            id="ipt_moveDiario"
+                        />
+
+                        <label>Quantos dias o operador trabalha mensamente</label>
+                        <input type="number" id="ipt_diasMesOperador" />
+
+                        <label>Custo Hora do operador</label>
+                        <input type="number" id="ipt_horaOperador" />
+                    </div>
+                    <div class="div_calc_Btn"><button onclick="calc2()">Calcular Custo</button></div>
+
+                    <div id="div_mensagem_calc2" ></div>
+
+                
+                </div>
+
+
+            </div>
+          
+            <div class="div_btn_gastoMensal"> <button onclick="gastoMensal()">VER GASTOS MENSAIS</button><br>
+                <div id="div_gastoMensal"></div>
+            </div>
+          
+
+        </div>
+           
+
+
+
+        <script>
+
+            let gastoCalc1 = 0;
+            let gastoCalc2 = 0;
+
+
+
+            function calc1() {
+                let palletMensal = Number(ipt_palletMensal.value);
+                let valorPallet = Number(ipt_valorPallet.value);
+                let taxaErro = Number(ipt_taxaErro.value);
+        
+                let perdaMensal = palletMensal * (taxaErro / 100) * valorPallet;
+
+                gastoCalc1 = perdaMensal;
+        
+                div_mensagem_calc1.innerHTML = `<p class="p_calc1">Perda Operacional Mensal:</p>   <p "p_calc1_perda">R$ ${perdaMensal} </p>`;
+            }
+
+            function calc2(){
+                let espacoLivre = Number(ipt_espacoLivre.value);
+                let moveDiario = Number(ipt_moveDiario.value);
+                let horaOperador = Number(ipt_horaOperador.value);
+                let diasMes = Number(ipt_diasMesOperador.value)
+
+                let valorBusca = (espacoLivre * moveDiario * diasMes / 60 ) * horaOperador
+
+                gastoCalc2 = valorBusca;
+
+                div_mensagem_calc2.innerHTML = ` <p class="p_calc2">Custo Mensal de:</p> <p class="p_calc2_perda">R$ ${valorBusca}</p>`
+
+            }
+
+            function gastoMensal(){
+                let gastoTotal = gastoCalc1 + gastoCalc2;
+
+                div_gastoMensal.innerHTML = `Você esta tendo perdendo mensalmente em torno de: R$ ${gastoTotal}, anualmente isso causa uma perca de: R$ ${gastoTotal * 12}`
+            }
+        </script>
+
+    </body>
 </html>
+
+

@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.div_navbar {
+    background-color: #f58442;
+    text-align: center;
+
+    color: white;
+}
+
+.div_conteudo{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.div_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+
+    justify-items: center;
+    align-items: center;
+}
+
+
+.div_btn_gastoMensal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.div_btn_gastoMensal button{
+    padding: 20px;
+    border-radius: 10px;
+
+}
+
+/* Estilizando a div do calculo*/
+
+.div_calc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 400px;
+
+    padding: 10px;
+}
+
+.div_calc_ipt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.div_calc_ipt label {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.div_calc_ipt input {
+    width: 200px;
+}
+
