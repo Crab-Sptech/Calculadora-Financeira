@@ -1,11 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculadora da Esther</title>
+
+    <style>
+        body {
+            background-image: url(background.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: Arial;
+            text-align: center;
+        }
+
+        .container {
+            background-color: #0b2239;
+            border-radius: 30px;   
+            color: #ffffff;
+            width: 400px;
+            margin: auto;
+            margin-left: 550px;
+            margin-top: 100px;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #ffffff;
+        }
+
+        button {
+            background-color: #f07a3a;
+            color: white;
+            border-radius: 20px;
+        }
+
+        #div_mensagem {
+            margin-top: 20px;
+        }
+    </style>
+
 </head>
+
 <body>
-    
+
+    <div class="container">
+
+        <h1>Calculadora SIMA</h1>
+
+        Quantidade de pallets que precisam ser gerenciados<br>
+        <input type="number" id="ipt_qtd_pallets"> <br><br>
+
+        Perdas médias mensais sem monitoramento (R$)<br>
+        <input type="number" id="ipt_media_perda"> <br><br>
+
+        Redução esperada de perdas (%)<br>
+        <input type="number" id="ipt_reducao_porcento"> <br><br>
+
+        <button onclick="calcular()">Calcular</button>
+
+        <div id="div_mensagem"></div>
+
+    </div>
+
 </body>
+
 </html>
+
+<script>
+
+    function calcular() {
+
+        let qtdPallets = Number(ipt_qtd_pallets.value);
+        let perdaMensalAtual = Number(ipt_media_perda.value);
+        let reducao = Number(ipt_reducao_porcento.value);
+
+        let investimento = qtdPallets * 750;
+
+        let perdaAnual = perdaMensalAtual * 12;
+
+        let economiaMensal = perdaMensalAtual * (reducao / 100);
+        let economiaAnual = economiaMensal * 12;
+
+        let economia5anos = economiaAnual * 5;
+
+        let retorno = investimento / economiaMensal;
+
+        div_mensagem.innerHTML = `
+        <h3>Simulação de Retorno Financeiro</h3>
+
+        <b>Situação atual da empresa</b><br>
+        Perda média mensal: R$ ${perdaMensalAtual.toFixed(2)}<br>
+        Perda anual estimada: R$ ${perdaAnual.toFixed(2)}<br><br>
+
+        <b>Impacto do sistema SIMA</b><br>
+        Redução estimada de perdas: ${reducao}%<br>
+        Economia mensal estimada: R$ ${economiaMensal.toFixed(2)}<br>
+        Economia anual estimada: R$ ${economiaAnual.toFixed(2)}<br><br>
+
+        <b>Investimento necessário</b><br>
+        Custo de implantação: R$ ${investimento.toFixed(2)}<br><br>
+
+        <b>Retorno financeiro</b><br>
+        Tempo estimado para retorno do investimento: ${retorno.toFixed(1)} meses<br>
+        Economia projetada em 5 anos: R$ ${economia5anos.toFixed(2)}`;
+
+    }
+
+</script>
