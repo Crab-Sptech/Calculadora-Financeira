@@ -3,9 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Simulador Financeiro SIMA</title>
 </head>
 <body>
+    <h1>Simulador Financeiro</h1>
+ 
+    Quantidade de Paletes:
+    <input type="text" id="qntPaletes"></input><br><br>
+ 
+    Setor da empresa:
+    <input type="text" id="iptSetor"></input><br><br>
+ 
+    Quantidade gasta por estoque mensalmente:
+    <input type="text" id="qntGasta"></input><br><br>
+ 
+    <button onclick="Calcular()"> Simular lucro </button><br>
+ 
+    <div id="resultado"></div>
     
 </body>
 </html>
+ 
+<script>
+ 
+    function Calcular(){
+        
+    let paletes = Number(qntPaletes.value);
+    let qntSensor = paletes;
+    let valorSensor = 100;
+    let valorSistema = valorSensor * qntSensor;
+    let valorInstacao = 300;
+    let valorTotal = valorSistema + valorInstacao;
+ 
+    let setor = iptSetor.value;
+    let gasto = Number(qntGasta.value);
+    let porcentagem = 0;
+    let prejuizo = 0;
+    let diferença = 0;
+    let lucro = 0;
+ 
+    if(setor == "alimentício"){
+        porcentagem = 0.96;
+        // industrias alimentícias tem uma perda de 4% do valor gasto, ou seja, 96% do valor gasto é o que sobra para a empresa
+    }
+    else{
+        porcentagem = 0.93;
+        // industrias de outros setores tem uma perda de 3% do valor gasto, ou seja, 97% do valor gasto é o que sobra para a empresa
+    }
+ 
+    prejuizo = gasto - (gasto * porcentagem);
+ 
+    diferença = gasto * 0.98;
+ 
+    lucro = gasto - diferença;
+    let anual = lucro * 12;
+ 
+    resultado.innerHTML = `O valor a ser cobrado pela instalação do nosso sistema é de R$ ${valorTotal.toFixed(2)}.<br>
+    O prejuizo estimado da industria é de R$ <span style="color: red;">${prejuizo.toFixed(2)}.</span><br>
+    O lucro estimado com o uso do nosso dispositivo é de R$ <span style="color: green;">${lucro.toFixed(2)}</span>.<br>
+    O lucro anual com o uso do nosso produto é de R$ <span style="color: green;">${anual.toFixed(2)}</span>`; 
+    }
+</script>
