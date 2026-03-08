@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    Valor do Estoque (R$): <br>
+    <input type="Number" id="ipt_valorEstoque"> <br><br>
+    Capacidade de Pallets (Estoque): <br>
+    <input type="Number" id="ipt_qtdPallets"> <br><br>
+    Perda Mensal (R$): <br>
+    <input type="Number" id="ipt_perdas"> <br><br>
+    <button onclick="calcular()">Calcular</button> <br><br>
+    <div id="div_mensagem"></div>
+
+</body>
+</html>
+
+<script>
+
+    function calcular(){
+
+        let valorEstoque = Number(ipt_valorEstoque.value);
+        let pallets = Number(ipt_qtdPallets.value);
+        let perdas = Number(ipt_perdas.value);
+        let sensores = pallets; 
+        let valorSensores = sensores*300;
+        let dias = Math.ceil(sensores/30); // math.ceil sempre arredonda números decimais para cima.
+        let valorInstalacaoFinal = dias*600;
+        let ganhos = perdas*0.8;
+        let perdasEstimadas = perdas*0.2;   
+
+        div_mensagem.innerHTML = `Simulacao:<br> Valor do Estoque: ${valorEstoque} Perdas atuais (Mensais): ${perdas} <br> 
+        Perdas Estimadas (com sensores): ${perdasEstimadas}<br> Ganho Estimado: ${ganhos}<br> 
+        Valor de Instalacao + sensores: ${valorInstalacaoFinal} <br> Valor do Estoque (com sensores): ${valorEstoque - perdasEstimadas}`
+
+    }
+
+    
+</script>
