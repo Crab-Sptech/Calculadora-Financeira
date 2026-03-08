@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="height: 100%; width: 100%;" id="principal">
+        <div style="width: 30%; height: 25%; border: 10px black; margin-left: 35px;" id="div_calculadora">
+            <h1>Calculadora Financeira</h1>
+            Valor do Estoque: 
+            <input type="number" id="ipt_valor"><br><br>
+            Tipo do Estoque (alimento/outros):
+            <input type="text" id="ipt_tipo"><br><br>
+            Estoque estimado com perdas:
+            <b style="color: red;" id="mensagem_perdas"></b><br><br>
+            Estoque estimado com nossa solução: 
+            <b style="color: green;" id="mensagem_solucao"></b><br><br>    
+            <button onclick="calcular()">Calcular</button>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+
+    function calcular(){
+        let valorEst = Number(ipt_valor.value)
+        let tipo = ipt_tipo.value
+        
+        if(tipo == 'alimentos'){
+            mensagem_perdas.innerHTML = `R$${valorEst*0.98}` // cerca de 2% de perda
+            mensagem_solucao.innerHTML = `R$${valorEst*0.996}` // valor estimado com nosso produto 
+        } if(tipo == 'outros'){
+            mensagem_perdas.innerHTML = `R$${valorEst*0.9838}` // cerca de 1.62% de perda
+            mensagem_solucao.innerHTML = `R$${valorEst*0.997}` // valor estimado com nosso produto
+        } 
+}
+
+</script>
