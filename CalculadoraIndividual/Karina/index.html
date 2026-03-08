@@ -1,11 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Simulador Financeiro</title>
 </head>
+
 <body>
-    
+    <h1 style="text-align: center;">Simulador Financeiro</h1>
+    <p style="font-size: larger; text-align: center;" ><i>Muitas empresas do setor perdem cerca de 15% do estoque por falta de monitoramento preciso. <br>
+            Com o <b>SIMA (Sistema Inteligente de Monitoramento de Armazém)</b> da <b>CRAB</b>,
+            você descobre se o seu índice está dentro da média de mercado ou onde podemos atuar para otimizar sua
+            operação.
+        </i></p>
+    <br>
+    <div style="text-align: center; font-size: x-large;">
+        Quantidade de pallets:<input type="text" id="ipt_qtd_pallets">
+        <br><br>
+        Valor da carga total: <input type="number" id="ipt_valorTotal">
+        <br><br>
+        <button style="font-size: medium;" onclick="gerarSimulacao()">Gerar Simulução</button>
+        <br><br>
+        <div id="mensagem"></div>
+    </div>
 </body>
 </html>
+
+<script>
+    function gerarSimulacao() {
+        let Quantidade = Number(ipt_qtd_pallets.value);
+        let valorCarga = Number(ipt_valorTotal.value);
+        let precoSensor = 120;
+
+        let valorTotalEstoque = Quantidade * valorCarga;
+        let perdaManual = valorTotalEstoque * 0.15; // 15% de perda sem monitoramento
+        let perdaCRAB = valorTotalEstoque * 0.01;   // 1% de perda com meus sensores
+        let investimento = Quantidade * precoSensor;
+        let economiaReal = perdaManual - perdaCRAB;
+
+        mensagem.innerHTML = `<b>Retorno Financeiro:</b><br><br>
+            • Sensores necessários: <b>${Quantidade} unidades</b><br>
+            • Investimento: <b>R$ ${investimento}</b><br><br>
+            <span style="color: red;"> <b>• Prejuízo atual (15%): R$ ${perdaManual.toFixed(2)}<br></b></span>
+            <span style="color: green;"> <b>• Economia com CRAB: R$ ${economiaReal.toFixed(2)}</b></span>`;
+    }
+</script>
