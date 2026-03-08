@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Simulação do projeto</h1>
+    <p>Insira os dados do seu armazém</p>
+    <p>Média do valor em R$ do armazem por ano:</p>
+    <input type="text" id="input_valorArmazem">
+    <p>Média calculada de perda em R$ em estoque no ultimo ano sem sensores</p>
+    <input type="text" id="input_mediaPerdida">
+    <p>Quantidade de porta-pallets no armazém de 4 entradas</p>
+    <input type="text" id="input_portapallets4">
+    <p>Quantidade de porta-pallets no armazém de 2 entradas</p>
+     <input type="text" id="input_portapallets2">
+    <button onclick="calcular()">Calcular simulação</button>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function calcular(){
+        let valorArmazem = Number(input_valorArmazem.value)
+        let mediaPerdida = Number(input_mediaPerdida.value)
+        let portaPallets4 = Number(input_portapallets4.value)
+        let portaPallets2 = Number(input_portapallets2.value)
+        let qntdSensor = portaPallets4 * 4 + portaPallets2 * 2
+        let valorSensor = qntdSensor * 100
+        let maoDeObra = qntdSensor * 50
+        let valorTotalPorSensor = (valorSensor + maoDeObra)/qntdSensor
+        let porcentagemAno = mediaPerdida * 100 / valorArmazem
+        let economia = mediaPerdida * 98 / 100
+        div_mensagem.innerHTML = `De acordo com os dados da nossa empresa, seu estoque sofre com a perda de ${porcentagemAno}% do valor do armazem por ano,
+                                     com a implementação dos nossos ${qntdSensor} sensores, essa perda irá ser reduzida em até 98% do valor total da sua perda,
+                                    gerando uma economia de R$ ${economia} ao ano. <br>
+                                    Custo total do projeto: R$ ${qntdSensor * 100 + maoDeObra}, sendo R$${valorTotalPorSensor} por sensor`
+    }
+</script>
